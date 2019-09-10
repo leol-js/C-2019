@@ -64,9 +64,7 @@ int main()
         case 11:
             printf("ой свиньи");
             break;
-        case 7:
-            printf("девять лет");
-            break;    }
+        }
 
     return 0;
 }
