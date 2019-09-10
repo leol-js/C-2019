@@ -41,21 +41,32 @@ int main()
             printf("ого зайца");
             break;
         case 4:
-            printf("четыре года");
+            printf("ого дракона");
             break;
         case 5:
-            printf("пять лет");
+            printf("ой змеи");
             break;
         case 6:
-            printf("шесть лет");
+            printf("ой лошади");
+            break;
+        case 7:
+            printf("ой овцы");
             break;
         case 8:
-            printf("восемь лет");
+            printf("ой обезьяны");
             break;
         case 9:
-            printf("девять лет");
+            printf("ой курицы");
             break;
-    }
+        case 10:
+            printf("ой собаки");
+            break;
+        case 11:
+            printf("ой свиньи");
+            break;
+        case 7:
+            printf("девять лет");
+            break;    }
 
     return 0;
 }
