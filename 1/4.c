@@ -14,6 +14,6 @@ int main()
     printf("Print time: \n");
     scanf("%f", &t);
 
-    printf("S = %f\n", (a + b * t));
+    printf("S = %f\n", (a + b) * t);
     return 0;
 }
