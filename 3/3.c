@@ -9,7 +9,7 @@ int main()
     scanf("%d", &a);
 
     printf("Год ");
-    switch ((a - 1984) / 12) {
+    switch (((a - 1984) % 60) % 5) {
         case 0:
             printf("зелен");
             break;
