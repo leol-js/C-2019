@@ -1,10 +1,9 @@
-# C-2019
-## C/C++ university lesson
+# C-2019 - C/C++ university lesson
 
 Compare and start by *gcc [lesson]/[task].c && a*
 
-# [Учебно-методическое пособие](https://vk.com/doc296044466_516282965?hash=2f1e5fde53dff85212&dl=ef9a53cf0a5682eb05)
-# [WIKI, Типы данных](https://ru.wikipedia.org/wiki/Система_типов_Си)
+* [Учебно-методическое пособие](https://vk.com/doc296044466_516282965?hash=2f1e5fde53dff85212&dl=ef9a53cf0a5682eb05)
+* [WIKI, Типы данных](https://ru.wikipedia.org/wiki/Система_типов_Си)
 
 ### [Тема 1. Введение](https://vk.com/doc296044466_516282976?hash=5f3c57c938962b01bb&dl=31b754de429bb3304f)
 > 1. Даны два ненулевых числа. Найти их сумму, разность, произведение и частное.
