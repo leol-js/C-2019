@@ -3,13 +3,14 @@
 
 
 void push(int *arr, int value, int *size, int *capacity) {
-     if(*size > *capacity){
-          realloc(arr, sizeof(arr) * 2);
-          *capacity = sizeof(arr) * 2;
-     }
+    printf("%d\n", sizeof(arr) / sizeof(int));
+    if(*size > *capacity){
+        realloc(arr, sizeof(arr) * 2);
+        *capacity = sizeof(arr) * 2;
+    }
 
-     arr[*size] = value;
-     *size = *size + 1;
+    arr[*size] = value;
+    *size = *size + 1;
 }
 
 void splitarray(int *array, int a, int b, int c) {
@@ -36,8 +37,6 @@ void splitarray(int *array, int a, int b, int c) {
 }
 
 void quicksort(int *array, int start, int end) {
-
-
     if (end - start <= 2) {
         splitarray(array, start, (end + start) / 2, end);
     } else {
@@ -51,16 +50,16 @@ int main() {
     char c;
     int size = 0;
     int capacity = 10;
-    int* array = (int*) malloc(capacity * sizeof(int));
+    int* array = malloc(capacity * sizeof(int));
 
     int num = 0;
-    char n = 1;
+    int n = 1;
 
     while ((c = getchar()) != '.') {
         switch (c) {
             case ' ':
             case 10 :
-                if (n = 1) {
+                if (n) {
                     push(array, num, &size, &capacity);
                     num = 0;
                     n = 0;
@@ -83,13 +82,9 @@ int main() {
                 printf("%s\n", "Stupid programm");
         }
     }
-    if (n = 1) {
+    if (n) {
         push(array, num, &size, &capacity);
     }
-
-    for (int i = 0; i < size; i += 1)
-        printf("%d ", array[i]);
-    printf("\n");
 
     quicksort(array, 0, size);
 
