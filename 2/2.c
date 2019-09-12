@@ -15,17 +15,16 @@ int main()
     if (length > r1 + r2) {
         printf("Circles do not contact\n");
     } else {
-        if (length == r1 + r2 || length == fabs(r1 - r2)) {
-            printf("Circles are contact\n");
+        if (length == 0 && fabs(r1 - r2) < 0.00003) {
+            printf("Circles are math up\n");
         } else {
-            if (length == 0 && r1 == r2) {
-                printf("Circles are math up\n");
+            if (length == r1 + r2 || length == fabs(r1 - r2)) {
+                printf("Circles are contact\n");
             } else {
                 printf("Circles are intersect\n");
             }
         }
     }
-
 
     return 0;
 }

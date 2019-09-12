@@ -3,7 +3,7 @@
 
 int main()
 {
-    int length;
+    float length;
     float area;
     printf("Print circle length: ");
     scanf("%f", &length);
