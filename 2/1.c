@@ -12,8 +12,8 @@ int main()
         if (a >=4 && b >= 4 && c >= 4) {
             printf("Four and more!\n");
         } else {
-            if (a == 2 && b == 2 && c == 2) {
-                printf("Two only!\n");
+            if (a == 2 || b == 2 || c == 2) {
+                printf("You have two!\n");
             } else {
                 printf("You have random mark!\n");
             }
