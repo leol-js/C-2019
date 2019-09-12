@@ -3,7 +3,6 @@
 
 
 void push(int *arr, int value, int *size, int *capacity) {
-    printf("%d\n", sizeof(arr) / sizeof(int));
     if(*size > *capacity){
         realloc(arr, sizeof(arr) * 2);
         *capacity = sizeof(arr) * 2;
@@ -11,6 +10,7 @@ void push(int *arr, int value, int *size, int *capacity) {
 
     arr[*size] = value;
     *size = *size + 1;
+    printf("%d\n", *size);
 }
 
 void splitarray(int *array, int a, int b, int c) {
@@ -85,11 +85,18 @@ int main() {
     if (n) {
         push(array, num, &size, &capacity);
     }
+    printf("Your unsorted array: \n");
+    for (int i = 0; i < size; i++)
+        printf("%d ", array[i]);
+    printf("\n");
 
+    printf("Start sorting...\n");
     quicksort(array, 0, size);
+    printf("Sorting finishd, your array: \n");
 
-    for (int i = 0; i < size; i += 1)
-        printf("%d ", array[i]) ;
+    for (int i = 0; i < size; i++)
+        printf("%d ", array[i]);
+    printf("\n");
 
     free(array);
     return 0;
