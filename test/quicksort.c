@@ -1,16 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "ArrayList.h"
 
 
 void push(int *arr, int value, int *size, int *capacity) {
     if(*size > *capacity){
+        printf("More memory\n");
         realloc(arr, sizeof(arr) * 2);
         *capacity = sizeof(arr) * 2;
+
+        if(arr == NULL) {          //reallocated pointer ptr1
+            printf("\nExiting!!");
+            free(arr);
+            exit(0);
+        }
     }
 
     arr[*size] = value;
     *size = *size + 1;
-    printf("%d\n", *size);
+    printf("%d/%d\n", *size - 1, *capacity);
 }
 
 void splitarray(int *array, int a, int b, int c) {
@@ -47,13 +55,18 @@ void quicksort(int *array, int start, int end) {
 }
 
 int main() {
+    
+
+
+
     char c;
     int size = 0;
     int capacity = 10;
     int* array = malloc(capacity * sizeof(int));
+    printf("%d\n", sizeof(array));
 
     int num = 0;
-    int n = 1;
+    int n = 0;
 
     while ((c = getchar()) != '.') {
         switch (c) {
