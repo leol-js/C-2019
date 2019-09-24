@@ -28,22 +28,32 @@ int main() {
         scanf("%d", &arr2[i]);
     }
 
-    qsort(*arr1, n1, compare);
-    qsort(*arr2, n2, compare);
+    qsort(arr1, n1, sizeof(int), compare);
+    qsort(arr2, n2, sizeof(int), compare);
 
     int arr[n1 + n2];
     int a = 0;
     int b = 0;
-    while (a < n1 && b < n2) {
-        if (a < n1 && arr1[a] < arr2[b]) {
-            arr[a + b] = arr1[a];
-            a++;
-        }
-        if (b < n2 && arr1[a] >= arr2[b]) {
+    while (a + b < n1 + n2) {
+        if (a < n1) {
+            if (b < n2) {
+                if (arr1[a] <= arr2[b]) {
+                    arr[a + b] = arr1[a];
+                    a++;
+                } else {
+                    arr[a + b] = arr2[b];
+                    b++;
+                }
+            } else {
+                arr[a + b] = arr1[a];
+                a++;
+            }
+        } else {
             arr[a + b] = arr2[b];
             b++;
         }
     }
+
 
     printf("Final array:\n");
     for (size_t i = 0; i < n1 + n2; i++) {
