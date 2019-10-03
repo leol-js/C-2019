@@ -1,9 +1,16 @@
-#define _POSIX_X_SOURCE 200809L
-
 #include <stdio.h>
-#include <inttypes.h>
 #include <math.h>
+#include <stdlib.h>
 #include <time.h>
+
+#define TRY 100000
+
+double timeSec() {
+    struct timespec tv;
+
+    clock_gettime(CLOCK_MONOTONIC, &tv);
+    return tv.tv_sec + ((double) tv.tv_nsec) / 1000000000;
+}
 
 int nodI(int a, int b) {
     int c = 1;
@@ -17,34 +24,38 @@ int nodI(int a, int b) {
 
 int nodR(int a, int b) {
     if (b == 0) return a;
-    nodR(a % b, a);
+    nodR(b, a % b);
 }
 
 int main(int argc, char const *argv[]) {
     printf("Print two number:\n");
     int a, b;
     scanf("%d%d", &a, &b);
-    double time1, time2;
+    double timeRS, timeRF, timeIS, timeIF;
     int nodr, nodi;
 
-    struct timespec spec;
+    timeRS = timeSec();
+    for (size_t i = 0; i < TRY; i++) {
+        nodr = nodR(a, b);
+    }
+    timeRF = timeSec();
 
+    timeIS = timeSec();
+    for (size_t i = 0; i < TRY; i++) {
+        nodi = nodI(a, b);
+    }
+    timeIF = timeSec();
 
-    clock_gettime(CLOCK_MONOTONIC, &spec);
-    time1 = spec.tv_nsec;
-    nodi = nodR(a, b);
-    clock_gettime(CLOCK_MONOTONIC, &spec);
-    time1 = spec.tv_nsec - time1;
-
-
-    clock_gettime(CLOCK_MONOTONIC, &spec);
-    time2 = spec.tv_nsec;
-    nodi = nodI(a, b);
-    clock_gettime(CLOCK_MONOTONIC, &spec);
-    time2 = spec.tv_nsec - time2;
+    if (nodi != nodr) {
+        printf("--------------------------------------------------------------\n");
+        printf("%14s | %6d %6d | \nIteractive : %6d\nRecursive : %6d\n", "ERROR NOD", a, b, nodi, nodr);
+        return 1;
+    }
 
     printf("--------------------------------------------------------------\n");
-    printf("%s : %lf\n%s : %lf\n", "Recursive", time1, "Normal", time2);
+    printf("%14s | %6.15lf sec\n%14s | %6.15lf sec\n",
+        "Recursive", (timeRF - timeRS) / TRY,
+        "Normal",    (timeIF - timeIS) / TRY);
 
     return 0;
 }
