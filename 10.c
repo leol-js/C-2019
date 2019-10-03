@@ -31,6 +31,7 @@ int main(int argc, char const *argv[]) {
     printf("Print two number:\n");
     int a, b;
     scanf("%d%d", &a, &b);
+
     double timeRS, timeRF, timeIS, timeIF;
     int nodr, nodi;
 
@@ -52,7 +53,7 @@ int main(int argc, char const *argv[]) {
         return 1;
     }
 
-    printf("--------------------------------------------------------------\n");
+    printf("-------------------------------------------------\n");
     printf("%14s | %6.15lf sec\n%14s | %6.15lf sec\n",
         "Recursive", (timeRF - timeRS) / TRY,
         "Normal",    (timeIF - timeIS) / TRY);
