@@ -10,13 +10,13 @@
 #define SIZE     10000
 
 
-void sortInsert(int iArray[], int iArrSize, int *swap , int *ifs );
-void sortBubble(int iArray[], int iArrSize, int *swap , int *ifs );
-void sortSelect(int iArray[], int iArrSize, int *swap , int *ifs );
-void sortQuick (int iArray[], int iArrSize, int *swap , int *ifs );
+void sortInsert(int iArray[], int iArrSize, long *swap , long *ifs );
+void sortBubble(int iArray[], int iArrSize, long *swap , long *ifs );
+void sortSelect(int iArray[], int iArrSize, long *swap , long *ifs );
+void sortQuick (int iArray[], int iArrSize, long *swap , long *ifs );
 
-void splitArraysToOne(int array[], int a, int b, int c, int *swap , int *ifs );
-void sortQuickIm(int array[], int start, int end, int *swap , int *ifs );
+void splitArraysToOne(int array[], int a, int b, int c, long *swap , long *ifs );
+void sortQuickIm(int array[], int start, int end, long *swap , long *ifs );
 
 void generateArray(int iArray[], int iArrSize, int minValue, int maxValue);
 void printArray(const char name[], int iArray[], int iArrSize);
@@ -24,8 +24,8 @@ void cloneArray(int array[], int newArray[], int iArrSize);
 int checkArray(int iArray[], int iArrSize);
 
 struct statistic{
-    int swap;
-    int ifs;
+    long swap;
+    long ifs;
 
     double summaryTime;
     double worseTime;
@@ -39,7 +39,7 @@ double timesSec() {
     return tv.tv_sec + ((double) tv.tv_nsec) / 1000000000;
 }
 
-double testSort(int array[], int arraySize, int *ifs, int *swap, void(*sorter)()) {
+double testSort(int array[], int arraySize, long *ifs, long *swap, void(*sorter)()) {
     int newArray[arraySize];
     cloneArray(array, newArray, arraySize);
 
@@ -66,7 +66,7 @@ int main() {
         for (size_t elementsSize = 10; elementsSize < SIZE; elementsSize *= 10) {
             int array[elementsNumber];
             for (size_t i = 0; i < 100; i++) {
-                int swap, ifs;
+                long swap, ifs;
                 double times;
                 generateArray(array, elementsNumber, 0, elementsSize);
 
@@ -109,8 +109,8 @@ int main() {
             printf("%15s | %11d %11d %11d %11d\n", "Number of ops",   ops, ops, ops, ops);
             printf("%15s | %11d %11d %11d %11d\n", "Number of elem",  elementsNumber, elementsNumber, elementsNumber, elementsNumber);
             printf("%15s | %11d %11d %11d %11d\n", "Size of elem",    elementsSize, elementsSize, elementsSize, elementsSize);
-            printf("%15s | %11d %11d %11d %11d\n", "Number of ifs",   insert.ifs, bubble.ifs, select.ifs, quick.ifs);
-            printf("%15s | %11d %11d %11d %11d\n", "Number of swaps", insert.swap, bubble.swap, select.swap, quick.swap);
+            printf("%15s | %11ld %11ld %11ld %11ld\n", "Number of ifs",   insert.ifs, bubble.ifs, select.ifs, quick.ifs);
+            printf("%15s | %11ld %11ld %11ld %11ld\n", "Number of swaps", insert.swap, bubble.swap, select.swap, quick.swap);
             printf("%15s | %3.9lf %3.9lf %3.9lf %3.9lf\n", "Summary times",    insert.summaryTime, bubble.summaryTime, select.summaryTime, quick.summaryTime);
             printf("%15s | %3.9lf %3.9lf %3.9lf %3.9lf\n", "Best times",       insert.bestTime, bubble.bestTime, select.bestTime, quick.bestTime);
             printf("%15s | %3.9lf %3.9lf %3.9lf %3.9lf\n", "Worse times",      insert.worseTime, bubble.worseTime, select.worseTime, quick.worseTime);
@@ -123,7 +123,7 @@ int main() {
 
 }
 
-void sortInsert(int iArray[], int iArrSize, int *swap , int *ifs ) {
+void sortInsert(int iArray[], int iArrSize, long *swap , long *ifs ) {
     int newElement, location;
 
     for (int i = 1; i < iArrSize; i++) {
@@ -143,7 +143,7 @@ void sortInsert(int iArray[], int iArrSize, int *swap , int *ifs ) {
 }
 
 
-void sortBubble(int iArray[], int iArrSize, int *swap , int *ifs ) {
+void sortBubble(int iArray[], int iArrSize, long *swap , long *ifs ) {
     for (size_t i = 0; i < iArrSize - 1; i++) {
         char flag = 0;
         for (size_t j = 0; j < iArrSize - i; j++) {
@@ -163,7 +163,7 @@ void sortBubble(int iArray[], int iArrSize, int *swap , int *ifs ) {
 }
 
 
-void sortSelect(int iArray[], int iArrSize, int *swap , int *ifs ) {
+void sortSelect(int iArray[], int iArrSize, long *swap , long *ifs ) {
     for (size_t i = 0; i < iArrSize - 1; i++) {
         size_t min = i;
         for (size_t j = i + 1; j < iArrSize; j++) {
@@ -182,10 +182,10 @@ void sortSelect(int iArray[], int iArrSize, int *swap , int *ifs ) {
 }
 
 
-void sortQuick (int iArray[], int iArrSize, int *swap , int *ifs ) {
+void sortQuick (int iArray[], int iArrSize, long *swap , long *ifs ) {
     sortQuickIm(iArray, 0, iArrSize + 1, swap , ifs );
 }
-void sortQuickIm(int iArray[], int start, int end, int *swap , int *ifs ) {
+void sortQuickIm(int iArray[], int start, int end, long *swap , long *ifs ) {
     if (end - start <= 2) {
         splitArraysToOne(iArray, start, (end + start) / 2, end, swap , ifs );
     } else {
@@ -195,7 +195,7 @@ void sortQuickIm(int iArray[], int start, int end, int *swap , int *ifs ) {
     }
     *ifs  += 1;
 }
-void splitArraysToOne(int array[], int a, int b, int c, int *swap , int *ifs ) {
+void splitArraysToOne(int array[], int a, int b, int c, long *swap , long *ifs ) {
     int size = c - a;
     int tmp[size];
     int counta = a;

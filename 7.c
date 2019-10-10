@@ -23,17 +23,21 @@ void sortIArray(int iArray[], int iArrSize);
 void qSortDArray(double dArray[], int dArrSize);
 void qSortIArray(int iArray[], int iArrSize);
 
-int compare(const void *a, const void *b);
+int compareI(const int *a, const int *b);
+int compareD(const double *a, const double *b);
 
 int main(int type) {
-    int a[30];
-    inputINumber("a", 1, 4);
-    generateIArray(a, 30, 10, 30);
-    outputIArray("a", a, 30);
-    inputIArray("a", a, 5);
-    outputIArray("a", a, 30);
-    qSortIArray(a, 30);
-    outputIArray("a", a, 30);
+    double a[30];
+    // inputDNumber("a", 1, 4);
+
+    generateDArray(a, 30, 10, 30);
+    outputDArray("a", a, 30);
+
+    // inputDArray("a", a, 5);
+    // outputDArray("a", a, 30);
+
+    qSortDArray(a, 30);
+    outputDArray("a", a, 30);
     return 0;
 }
 
@@ -173,13 +177,17 @@ void sortIArray(int iArray[], int iArrSize) {
 }
 
 void qSortDArray(double dArray[], int dArrSize) {
-    qsort(dArray, dArrSize, sizeof(double), compare);
+    qsort(dArray, dArrSize, sizeof(double), (int(*) (const void *, const void *)) compareD);
 }
 
 void qSortIArray(int iArray[], int iArrSize) {
-    qsort(iArray, iArrSize, sizeof(int), compare);
+    qsort(iArray, iArrSize, sizeof(int), (int(*) (const void *, const void *)) compareI);
 }
 
-int compare(const void *a, const void *b) {
-    return a == b? 0 : a > b? 1 : -1;
+int compareI(const int *a, const int *b) {
+    return *a - *b;
+}
+
+int compareD(const double *a, const double *b) {
+    return *a == *b? 0 : *a > *b? 1: -1;
 }
