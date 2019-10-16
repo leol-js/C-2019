@@ -6,7 +6,7 @@
 #define INT_SIZE 1000
 
 double inputDNumber(const char name[], double left, double right);
-double inputINumber(const char name[], int left, int right);
+int inputINumber(const char name[], int left, int right);
 
 void inputDArray(const char name[], double dArray[], int dArrSize);
 void inputIArray(const char name[], int iArray[], int iArrSize);
@@ -52,7 +52,7 @@ double inputDNumber(const char name[], double left, double right) {
     return rez;
 }
 
-double inputINumber(const char name[], int left, int right) {
+int inputINumber(const char name[], int left, int right) {
   	int rez;
   	do {
     	printf(name);
