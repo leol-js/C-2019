@@ -1,4 +1,14 @@
 #include "DoubleServiceFunctions.h"
+#define RAND_MAX 32767
+
+typedef long int __time_t;
+typedef __time_t time_t;
+
+int printf(const char *format, ...);
+int scanf(const char *format, ...);
+void srand(unsigned seed);
+time_t time(time_t *time);
+int rand(void);
 
 double inputDNumber(const char name[], double left, double right) {
   	double rez;
