@@ -4,14 +4,13 @@
 #include <stdlib.h>
 #include <math.h>
 #include <time.h>
-#include "IntegerSortingFunctions.h"
+
 #include "IntegerServiceFunctions.h"
+#include "IntegerSortingFunctions.h"
 
 #define TEST     100
 #define ELEMENTS 10000
 #define SIZE     10000
-
-int checkArray(int iArray[], int iArrSize);
 
 struct statistic{
     long swap;
@@ -31,7 +30,7 @@ double timesSec() {
 
 double testSort(int array[], int arraySize, long *ifs, long *swap, void(*sorter)()) {
     int newArray[arraySize];
-    cloneArray(array, newArray, arraySize);
+    cloneIArray(array, newArray, arraySize);
 
     double a, b;
     a = timesSec();
@@ -58,10 +57,10 @@ int main() {
             for (size_t i = 0; i < 100; i++) {
                 long swap, ifs;
                 double times;
-                generateArray(array, elementsNumber, 0, elementsSize);
+                generateIArray(array, elementsNumber, 0, elementsSize);
 
                 swap = 0, ifs = 0, times = 0;
-                times = testSort(array, elementsNumber, &ifs, &swap, sortInsert);
+                times = testSort(array, elementsNumber, &ifs, &swap, sortInsertCount);
                 insert.summaryTime += times;
                 insert.swap += swap;
                 insert.ifs += ifs;
@@ -69,7 +68,7 @@ int main() {
                 if (insert.bestTime > times) insert.bestTime = times;
 
                 swap = 0, ifs = 0, times = 0;
-                times = testSort(array, elementsNumber, &ifs, &swap, sortBubble);
+                times = testSort(array, elementsNumber, &ifs, &swap, sortBubbleCount);
                 bubble.summaryTime += times;
                 bubble.swap += swap;
                 bubble.ifs += ifs;
@@ -78,7 +77,7 @@ int main() {
 
 
                 swap = 0, ifs = 0, times = 0;
-                times = testSort(array, elementsNumber, &ifs, &swap, sortSelect);
+                times = testSort(array, elementsNumber, &ifs, &swap, sortSelectCount);
                 select.summaryTime += times;
                 select.swap += swap;
                 select.ifs += ifs;
@@ -87,7 +86,7 @@ int main() {
 
 
                 swap = 0, ifs = 0, times = 0;
-                times = testSort(array, elementsNumber, &ifs, &swap, sortQuick );
+                times = testSort(array, elementsNumber, &ifs, &swap, sortQuickCount );
                 quick.summaryTime += times;
                 quick.swap += swap;
                 quick.ifs += ifs;
@@ -109,14 +108,4 @@ int main() {
             printf("-----------------------------------------------------------------\n");
         }
     }
-
-
-}
-
-int checkArray(int iArray[], int iArrSize) {
-    if (iArrSize < 2) return 0;
-    for (size_t i = 0; i < iArrSize - 1; i++) {
-        if (iArray[i] > iArray[i + 1]) return i;
-    }
-    return 0;
 }

@@ -3,6 +3,7 @@
 
 typedef long int __time_t;
 typedef __time_t time_t;
+typedef unsigned long size_t;
 
 int printf(const char *format, ...);
 int scanf(const char *format, ...);
@@ -61,4 +62,18 @@ void outputDArray(const char name[], double dArray[], int dArrSize) {
   	}
     printf("\n");
     return;
+}
+
+int checkDArray(double dArray[], int dArrSize) {
+    if (dArrSize < 2) return 0;
+    for (size_t i = 0; i < dArrSize - 1; i++) {
+        if (dArray[i] > dArray[i + 1]) return i;
+    }
+    return 0;
+}
+
+void cloneDArray(int dArray[], int newDArray[], int dArrSize) {
+    for (size_t i = 0; i < dArrSize; i++) {
+        newDArray[i] = dArray[i];
+    }
 }

@@ -4,6 +4,7 @@
 
 typedef long int __time_t;
 typedef __time_t time_t;
+typedef unsigned long size_t;
 
 int printf(const char *format, ...);
 int scanf(const char *format, ...);
@@ -60,4 +61,18 @@ void outputIArray(const char name[], int iArray[], int iArrSize) {
     }
     printf("\n");
     return;
+}
+
+int checkIArray(int iArray[], int iArrSize) {
+    if (iArrSize < 2) return -1;
+    for (size_t i = 0; i < iArrSize - 1; i++) {
+        if (iArray[i] > iArray[i + 1]) return i;
+    }
+    return -1;
+}
+
+void cloneIArray(int iArray[], int newIArray[], int iArrSize) {
+    for (size_t i = 0; i < iArrSize; i++) {
+        newIArray[i] = iArray[i];
+    }
 }
