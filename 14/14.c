@@ -2,26 +2,26 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+int openFile(char name[], char mode[], FILE** file) {
+    if (!(*file = fopen(name, mode))) {
+        printf("Can not open file! : %s", name);
+        return 1;
+    }
+    return 0;
+}
 
-int main(int argc, char const *argv[]) {
+int test() {
     FILE *fin, *fout;
-
-    if (!(fin = fopen("14/test.in", "r+"))) {
-        printf("Can not open file! : test.in");
-        return -1;
-    }
-
-    if (!(fout = fopen("14/test.out", "w+"))) {
-        printf("Can not open file! : test.out");
-        return -1;
-    }
+    int i = openFile("14/test.in", "r+", &fin);
+    i += openFile("14/test.out", "w+", &fout);
+    if (i > 0) return -1;
 
     int size = 0;
     int rsize = 10;
 
-    char *type = malloc(rsize * sizeof(int));
-    char *string = malloc(rsize * sizeof(int));
-    char *position = malloc(rsize * sizeof(int));
+    char *type = malloc(rsize * sizeof(char));
+    int *string = malloc(rsize * sizeof(int));
+    int *position = malloc(rsize * sizeof(int));
 
     int curPosition = 0;
     int curString = 1;
@@ -37,6 +37,12 @@ int main(int argc, char const *argv[]) {
             case '{':
             case '[':
             case '(':
+                if (size == rsize) {
+                    rsize *= 2;
+                    type = realloc(type, rsize * sizeof(char));
+                    string = realloc(string, rsize * sizeof(int));
+                    position = realloc(position, rsize * sizeof(int));
+                }
                 type[size] = c;
                 string[size] = curString;
                 position[size] = curPosition;
@@ -51,13 +57,18 @@ int main(int argc, char const *argv[]) {
                     if (type[size] == (c - ((c == ')')? 1: 2))) {
                         fprintf(fout, "%c%c | open - %4i:%-4i | close - %4i:%-4i\n", type[size], c, string[size], position[size], curString, curPosition);
                     } else {
-                        fprintf(fout, "%c  | open - %4i:%-4i | close - NAN\n", type[size], string[size], position[size]);
-                        fprintf(fout, "%c  | open -     NAN | close - %4i:%-4i\n", c, curString, curPosition);
+                        fprintf(fout, "%c  | open - %4i:%-4i | close -     NAN  \n", type[size], string[size], position[size]);
+                        fprintf(fout, "%c  | open -     NAN   | close - %4i:%-4i\n", c, curString, curPosition);
                     }
                 } else {
-                    fprintf(fout, "%c  | open - NAN | close - %4i:%-4i\n", c, curString, curPosition);
+                    fprintf(fout, "%c  | open -     NAN   | close - %4i:%-4i\n", c, curString, curPosition);
                 }
         }
     }
     return 0;
+}
+
+
+int main(int argc, char const *argv[]) {
+    return test();
 }
